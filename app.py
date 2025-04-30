@@ -13,6 +13,11 @@ CORS(app)
 # Initialize Groq client with API key from environment
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
+# Add health check route
+@app.route('/', methods=['GET'])
+def health_check():
+    return jsonify({"status": "healthy"}), 200
+
 @app.route('/api/query', methods=['POST'])
 def query():
     try:
